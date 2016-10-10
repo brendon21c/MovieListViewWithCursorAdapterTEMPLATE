@@ -20,6 +20,9 @@ public class MovieCursorAdapter extends CursorAdapter {
 	private static final int ID_COL = 0;
 	private static final int MOVIE_COL = 1;
 	private static final int RATING_COL = 2;
+	private static final int YEAR_COL = 3;
+	private static final int REVIEW_COL = 4;
+
 
 	public MovieCursorAdapter(Context context, Cursor c, boolean autoRequery) {
 		super(context, c, autoRequery);
@@ -44,9 +47,13 @@ public class MovieCursorAdapter extends CursorAdapter {
 
 		TextView nameTV = (TextView) view.findViewById(R.id.movie_title_list_text_view);
 		RatingBar ratingbar = (RatingBar) view.findViewById(R.id.movie_rating_list_rating_bar);
+		TextView yearTV = (TextView) view.findViewById(R.id.year_made);
 
 		nameTV.setText(cursor.getString(MOVIE_COL));
 		ratingbar.setRating(cursor.getFloat(RATING_COL));
+		yearTV.setText(cursor.getString(YEAR_COL));
+		String reviewdate = cursor.getString(REVIEW_COL);
+
 
 		final int movie_id = cursor.getInt(ID_COL); // Need this to update data.
 

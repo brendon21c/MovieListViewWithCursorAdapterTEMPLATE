@@ -26,6 +26,19 @@
         />
 
     <TextView
+        android:text="Year Made"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/year_made"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/year_made_ET"/>
+
+    <TextView
         android:id="@+id/add_movie_rating_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

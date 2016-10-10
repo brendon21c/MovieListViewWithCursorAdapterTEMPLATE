@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RatingBar;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class MovieActivity extends AppCompatActivity implements MovieCursorAdapter.RatingChangedListener {
 
 	private static final String TAG = "MOVIE ACTIVITY";
@@ -27,6 +30,7 @@ public class MovieActivity extends AppCompatActivity implements MovieCursorAdapt
 		Button addNew = (Button) findViewById(R.id.add_movie_button);
 		final EditText newMovieNameET = (EditText) findViewById(R.id.add_movie_name);
 		final RatingBar newMovieRB = (RatingBar) findViewById(R.id.add_movie_rating_bar);
+		final EditText newMovieYearET = (EditText) findViewById(R.id.year_made_ET);
 
 		final ListView movieList = (ListView) findViewById(R.id.movie_list_view);
 
@@ -41,7 +45,13 @@ public class MovieActivity extends AppCompatActivity implements MovieCursorAdapt
 				String name = newMovieNameET.getText().toString();
 				float rating = newMovieRB.getRating();
 
-				dbManager.addMovie(name,rating);
+				Integer year = Integer.parseInt(newMovieYearET.getText().toString());
+
+				SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+
+				String reviewDate = date.format(new Date());
+
+				dbManager.addMovie(name,rating, year, reviewDate);
 				cursorListAdapter.changeCursor(dbManager.getAllMovies()); // updates the list with all movies
 
 			}

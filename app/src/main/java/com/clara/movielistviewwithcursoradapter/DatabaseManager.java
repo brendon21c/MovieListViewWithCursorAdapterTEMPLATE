@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.Date;
+
 public class DatabaseManager {
 
 	private Context context;
@@ -21,6 +23,8 @@ public class DatabaseManager {
 	protected static final String ID_COL = "_id";
 	protected static final String MOVIE_NAME_COL = "name";
 	protected static final String MOVIE_RATING_COL = "rating";
+	protected static final String MOVIE_YEAR_COL= "Year";
+	protected static final String MOVIE_REVIEWED_DATE_COL = "Date";
 
 	private static final String DB_TAG = "DatabaseManager" ;
 	private static final String SQLTAG = "SQLHelper" ;
@@ -68,15 +72,20 @@ public class DatabaseManager {
 
 	//Add a product and quantity to the database.
 	// Returns true if movie added, false if movie is already in the database
-	public boolean addMovie(String name, float rating) {
+	public boolean addMovie(String name, float rating, Integer yearMade, String reviewDate) {
+
+
 
 		ContentValues newMovie = new ContentValues();
 		newMovie.put(MOVIE_NAME_COL, name);
 		newMovie.put(MOVIE_RATING_COL, rating);
+		newMovie.put(MOVIE_YEAR_COL, yearMade);
+		newMovie.put(MOVIE_REVIEWED_DATE_COL, reviewDate); // current date as string
 
 		try {
 			db.insertOrThrow(DB_TABLE, null, newMovie);
-			Log.d(DB_TAG, "Added new movie " + name + " with rating " + rating);
+			Log.d(DB_TAG, "Added new movie " + name + " with rating " + rating + " with year " + yearMade
+			+ " reviewed on " + reviewDate);
 
 			return true;
 
@@ -99,8 +108,10 @@ public class DatabaseManager {
 
 		@Override
 		public void onCreate(SQLiteDatabase db) {
-			String createSQLbase = "CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT UNIQUE, %s FLOAT )";
-			String createSQL = String.format(createSQLbase, DB_TABLE, ID_COL, MOVIE_NAME_COL, MOVIE_RATING_COL);
+			String createSQLbase = "CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT UNIQUE, %s FLOAT, %s INTEGER, " +
+					"%s TEXT UNIQUE )";
+			String createSQL = String.format(createSQLbase, DB_TABLE, ID_COL, MOVIE_NAME_COL, MOVIE_RATING_COL,
+					MOVIE_YEAR_COL, MOVIE_REVIEWED_DATE_COL); // Adding new columns to database.
 			db.execSQL(createSQL);
 		}
 
