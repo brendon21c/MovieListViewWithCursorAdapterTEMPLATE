@@ -47,12 +47,13 @@ public class MovieCursorAdapter extends CursorAdapter {
 
 		TextView nameTV = (TextView) view.findViewById(R.id.movie_title_list_text_view);
 		RatingBar ratingbar = (RatingBar) view.findViewById(R.id.movie_rating_list_rating_bar);
-		TextView yearTV = (TextView) view.findViewById(R.id.year_made);
+		TextView yearTV = (TextView) view.findViewById(R.id.movie_year_made_text_view);
+		TextView reviewDate = (TextView) view.findViewById(R.id.movie_review_date);
 
 		nameTV.setText(cursor.getString(MOVIE_COL));
 		ratingbar.setRating(cursor.getFloat(RATING_COL));
 		yearTV.setText(cursor.getString(YEAR_COL));
-		String reviewdate = cursor.getString(REVIEW_COL);
+		reviewDate.setText(cursor.getString(REVIEW_COL));
 
 
 		final int movie_id = cursor.getInt(ID_COL); // Need this to update data.

@@ -42,7 +42,8 @@ public class DatabaseManager {
 
 	public Cursor getAllMovies() {
 
-		Cursor cursor = db.query(DB_TABLE, null, null, null, null, null, MOVIE_NAME_COL);
+		Cursor cursor = db.query(DB_TABLE,null,null,null, null, null, MOVIE_YEAR_COL);
+
 		return cursor;
 	}
 
@@ -108,8 +109,7 @@ public class DatabaseManager {
 
 		@Override
 		public void onCreate(SQLiteDatabase db) {
-			String createSQLbase = "CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT UNIQUE, %s FLOAT, %s INTEGER, " +
-					"%s TEXT UNIQUE )";
+			String createSQLbase = "CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT, %s FLOAT, %s INTEGER, %s TEXT )";
 			String createSQL = String.format(createSQLbase, DB_TABLE, ID_COL, MOVIE_NAME_COL, MOVIE_RATING_COL,
 					MOVIE_YEAR_COL, MOVIE_REVIEWED_DATE_COL); // Adding new columns to database.
 			db.execSQL(createSQL);
